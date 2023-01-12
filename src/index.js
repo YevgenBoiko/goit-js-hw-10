@@ -18,7 +18,9 @@ function onFetchCountries(e) {
     deleteMarkup();
     return;
   }
-  fetchCountries(value.trim()).then(addMarkup);
+  fetchCountries(value.trim())
+    .then(addMarkup)
+    .catch(error => console.log(error));
 }
 
 function addMarkup(data) {

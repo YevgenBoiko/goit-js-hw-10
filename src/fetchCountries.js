@@ -5,9 +5,10 @@ export default function fetchCountries(name) {
   return fetch(
     `${BASE_URL}${name}?fields=name,capital,languages,population,flags,flag`
   ).then(response => {
-    if (response.status === 404) {
+    if (!response.ok) {
       Notify.failure('Oops, there is no country with that name');
     }
+
     return response.json();
   });
 }
