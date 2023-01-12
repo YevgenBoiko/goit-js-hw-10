@@ -14,13 +14,13 @@ input.addEventListener('input', debounce(onFetchCountries, DEBOUNCE_DELAY));
 
 function onFetchCountries(e) {
   const { value } = e.target;
-  if (!value.trim()) {
-    deleteMarkup();
-    return;
-  }
+
   fetchCountries(value.trim())
     .then(addMarkup)
-    .catch(error => console.log(error));
+    .catch(() => {
+      deleteMarkup();
+      return Notify.failure('Oops, there is no country with that name');
+    });
 }
 
 function addMarkup(data) {
